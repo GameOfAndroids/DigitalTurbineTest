@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">DigitalTurbineTest</string>
+    <string name="imageview_product_content_description">Thumbnail image of product</string>
+    <string name="rating_label">Rating:</string>
+</resources>
