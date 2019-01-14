@@ -1,34 +1,10 @@
 package com.tm78775.digitalturbinetest.datasource
 
-abstract class SuperDataSource <T> {
+class DataSource<T> {
 
     // region Variables
 
-    protected val dataSource: MutableList<T> = mutableListOf()
-    var sectionTitle: String? = null
-
-    // endregion
-
-    // region Abstract Method Definitions
-
-    /**
-     * This method should remove item by allowing object comparison in child class.
-     * @param item item to be removed.
-     */
-    abstract fun removeItem(item: T)
-
-    /**
-     * This method should return an item by doing object comparison in child class.
-     * @param item index of the item to be returned.
-     * @return int index of the item found in the data source, or -1 if not found.
-     */
-    abstract fun getItemIndex(item: T): Int
-
-    /**
-     * In the event a sort is needed on the items, the child class should handle how
-     * to sort the items.
-     */
-    abstract fun sort()
+    private val dataSource: MutableList<T> = mutableListOf()
 
     // endregion
 
@@ -83,7 +59,7 @@ abstract class SuperDataSource <T> {
 
     /**
      * This method will remove the item in the list by index.
-     *
+     * @param index index of the item which should be removed.
      */
     fun removeItem(index: Int) {
         dataSource.removeAt(index)

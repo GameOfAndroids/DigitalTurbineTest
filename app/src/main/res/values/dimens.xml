@@ -2,7 +2,10 @@
 <resources>
     <integer name="animation_dur_medium">800</integer>
     <dimen name="cardview_medium_radius">8dp</dimen>
-    <dimen name="cardview_default_margin">8dp</dimen>
+    <dimen name="cardview_default_margin">4dp</dimen>
     <dimen name="cardview_medium_elevation">4dp</dimen>
+    <dimen name="cardview_default_top_bottom_margin">2dp</dimen>
     <dimen name="imageview_thumb_square">60dp</dimen>
+    <dimen name="progressbar_elevation">4dp</dimen>
+    <integer name="progressbar_showhide_dur">200</integer>
 </resources>
