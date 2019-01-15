@@ -13,7 +13,7 @@ import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 import java.lang.Exception
 
 class ServerAPIModel: Callback<ResponseBody> {
-
+    // TODO: TUTORIAL: https://futurestud.io/tutorials/retrofit-how-to-integrate-xml-converter
     // region Variables
 
     private val tag = "ServerAPIModel"
