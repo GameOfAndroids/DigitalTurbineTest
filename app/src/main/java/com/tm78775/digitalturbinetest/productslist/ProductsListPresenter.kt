@@ -32,11 +32,14 @@ class ProductsListPresenter(private val view: ProductsListContract.View): Produc
     override fun displayProductsList() {
         model ?: throw IllegalStateException("The model must be instantiated for the ProductsListPresenter to function properly.")
         view.showProgressBar(true)
-        model!!.getProductsSimulated { it ->
-            recyclerViewAdapter.appendToDataSource(it)
-            view.notifyAndPerformEnterAnimation()
-            view.showProgressBar(false)
+        model!!.getProducts { it ->
+            val s = ""
         }
+//        model!!.getProductsSimulated { it ->
+//            recyclerViewAdapter.appendToDataSource(it)
+//            view.notifyAndPerformEnterAnimation()
+//            view.showProgressBar(false)
+//        }
     }
 
 }

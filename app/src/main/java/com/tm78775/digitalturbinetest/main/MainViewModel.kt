@@ -15,8 +15,7 @@ class MainViewModel: ViewModel() {
     private val products = ArrayList<Product>()
 
     fun getProducts(callback: (List<Product>) -> Unit) {
-        // this should use the server API.
-        callback(listOf())
+        serverAPIModel.getProductList()
     }
 
     fun getProductsSimulated(callback: (List<Product>) -> Unit) {

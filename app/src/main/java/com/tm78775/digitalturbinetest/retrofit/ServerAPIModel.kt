@@ -3,25 +3,25 @@ package com.tm78775.digitalturbinetest.retrofit
 import android.util.Log
 import com.google.gson.GsonBuilder
 import com.tm78775.digitalturbinetest.datamodel.Product
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.simplexml.SimpleXmlConverterFactory
+import java.lang.Exception
 
-class ServerAPIModel: Callback<String> {
+class ServerAPIModel: Callback<ResponseBody> {
 
     // region Variables
 
     private val tag = "ServerAPIModel"
     private val baseUrl = "http://ads.appia.com/"
-    private val gson = GsonBuilder()
-        .setLenient()
-        .create()
 
     private val retrofit = Retrofit.Builder()
         .baseUrl(baseUrl)
-        .addConverterFactory(GsonConverterFactory.create(gson))
+        .addConverterFactory(SimpleXmlConverterFactory.create())
         .build()
 
     private val serverAPI = retrofit.create(ServerAPI::class.java)
@@ -50,26 +50,39 @@ class ServerAPIModel: Callback<String> {
     }
 
     fun getProductList() {
-        val call = serverAPI.getProductsList("miller")
-        call.enqueue(this)
+        try {
+            val call: Response<ResponseBody> = serverAPI.getProductsList("miller").execute()
+            val s = ""
+        } catch (ex: Exception) {
+            Log.e(tag, "An error occurred making GET request: ${ex.localizedMessage}")
+            val t = ""
+        }
     }
 
     // endregion
 
     // region Callback Implementation Methods
 
-    override fun onResponse(call: Call<String>, response: Response<String>) {
-        if(response.isSuccessful) {
-            val list = response.body()
-            var s = ""
-        }
+    override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun onFailure(call: Call<String>, t: Throwable) {
-        val body = call.request().body()
-        Log.e(tag, "An error occurred performing GET request: ${t.localizedMessage}")
-        t.printStackTrace()
+    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+
+//    override fun onResponse(call: Call<String>, response: Response<String>) {
+//        if(response.isSuccessful) {
+//            val list = response.body()
+//            var s = ""
+//        }
+//    }
+
+//    override fun onFailure(call: Call<String>, t: Throwable) {
+//        val body = call.request().body()
+//        Log.e(tag, "An error occurred performing GET request: ${t.localizedMessage}")
+//        t.printStackTrace()
+//    }
 
     // endregion
 
