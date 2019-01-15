@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity(), MainViewModel.ViewModelActivity, Progr
 
     private lateinit var model: MainViewModel
     private lateinit var progressBar: ProgressBar
-    private val progressBarAnimDuration: Long = 200 // (R.integer.progressbar_showhide_dur).toLong() // 200
+    private val progressBarAnimDuration: Long = 200
 
     // endregion
 

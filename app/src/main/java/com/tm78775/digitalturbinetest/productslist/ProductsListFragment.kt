@@ -1,10 +1,8 @@
 package com.tm78775.digitalturbinetest.productslist
 
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.tm78775.digitalturbinetest.R
-import com.tm78775.digitalturbinetest.main.MainActivity
 import com.tm78775.digitalturbinetest.main.MainViewModel
 import com.tm78775.digitalturbinetest.recyclerview.SuperRecyclerView
 import com.tm78775.digitalturbinetest.viewinterface.ProgressBarInterface
@@ -54,16 +51,14 @@ class ProductsListFragment : Fragment(), ProductsListContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         rv = view.findViewById<SuperRecyclerView>(R.id.productsRecyclerView)
-        // rv.layoutAnimation = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_fall_down)
+        rv.layoutAnimation = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_fall_down)
         rv.layoutManager = LinearLayoutManager(view.context, RecyclerView.VERTICAL, false)
         rv.setOnBottomListener { presenter.onBottomReached() }
+        rv.adapter = presenter.getAdapter()
     }
 
     override fun onStart() {
         super.onStart()
-        rv.adapter = presenter.getAdapter()
-        rv.layoutAnimation = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_fall_down)
-        rv.scheduleLayoutAnimation()
         presenter.displayProductsList()
     }
 
@@ -75,10 +70,5 @@ class ProductsListFragment : Fragment(), ProductsListContract.View {
         (activity as? ProgressBarInterface)?.showProgressBar(show)
     }
 
-    override fun scheduleRVAnimation() {
-//        rv.adapter = presenter.getAdapter()
-//        rv.layoutAnimation = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_fall_down)
-//        rv.scheduleLayoutAnimation()
-    }
     // endregion
 }

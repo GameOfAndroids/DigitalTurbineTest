@@ -1,5 +1,8 @@
 package com.tm78775.digitalturbinetest.productslist
 
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 import com.tm78775.digitalturbinetest.adapter.ProductsAdapter
 import com.tm78775.digitalturbinetest.main.MainViewModel
 import java.lang.IllegalStateException
@@ -31,7 +34,7 @@ class ProductsListPresenter(private val view: ProductsListContract.View): Produc
         view.showProgressBar(true)
         model!!.getProductsSimulated { it ->
             recyclerViewAdapter.appendToDataSource(it)
-            view.scheduleRVAnimation()
+            recyclerViewAdapter.notifyDataSetChanged()
             view.showProgressBar(false)
         }
     }

@@ -10,7 +10,6 @@ interface ProductsListContract {
      */
     interface View {
         fun showProgressBar(show: Boolean)
-        fun scheduleRVAnimation()
     }
 
     /**

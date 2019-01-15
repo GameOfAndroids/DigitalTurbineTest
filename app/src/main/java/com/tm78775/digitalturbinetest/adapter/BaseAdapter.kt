@@ -7,10 +7,10 @@ import java.lang.IllegalStateException
 abstract class BaseAdapter<T>: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var dataSource: DataSource<T> = DataSource()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+//        set(value) {
+//            field = value
+//            notifyDataSetChanged()
+//        }
 
     override fun getItemCount(): Int {
         return dataSource.getItemCount()
@@ -19,7 +19,7 @@ abstract class BaseAdapter<T>: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     fun appendToDataSource(items: List<T>) {
         val startIndex = dataSource.getItemCount()
         dataSource.addPageOfItems(items)
-        notifyItemRangeInserted(startIndex, items.count())
+        // notifyItemRangeInserted(startIndex, items.count())
     }
 
 }
