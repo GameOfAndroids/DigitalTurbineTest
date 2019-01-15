@@ -8,9 +8,10 @@
 
     <com.tm78775.digitalturbinetest.recyclerview.SuperRecyclerView
             android:layout_width="0dp"
-            android:layout_height="0dp" android:layout_marginTop="8dp"
+            android:layout_height="0dp"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp" android:layout_marginBottom="1dp"
+            android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" android:id="@+id/productsRecyclerView"/>
+            android:layout_marginEnd="8dp" android:id="@+id/productsRecyclerView"
+            android:foregroundGravity="center_horizontal"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

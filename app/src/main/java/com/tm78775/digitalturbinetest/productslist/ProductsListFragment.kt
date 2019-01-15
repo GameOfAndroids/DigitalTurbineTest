@@ -8,8 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.GridLayoutManager
 
 import com.tm78775.digitalturbinetest.R
 import com.tm78775.digitalturbinetest.main.MainViewModel
@@ -51,8 +50,7 @@ class ProductsListFragment : Fragment(), ProductsListContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         rv = view.findViewById<SuperRecyclerView>(R.id.productsRecyclerView)
-        rv.layoutAnimation = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_fall_down)
-        rv.layoutManager = LinearLayoutManager(view.context, RecyclerView.VERTICAL, false)
+        rv.layoutManager = GridLayoutManager(view.context, 2) //  LinearLayoutManager(view.context, RecyclerView.VERTICAL, false)
         rv.setOnBottomListener { presenter.onBottomReached() }
         rv.adapter = presenter.getAdapter()
     }
@@ -68,6 +66,12 @@ class ProductsListFragment : Fragment(), ProductsListContract.View {
 
     override fun showProgressBar(show: Boolean) {
         (activity as? ProgressBarInterface)?.showProgressBar(show)
+    }
+
+    override fun notifyAndPerformEnterAnimation() {
+        rv.layoutAnimation = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_from_bottom)
+        rv.adapter?.notifyDataSetChanged()
+        rv.scheduleLayoutAnimation()
     }
 
     // endregion

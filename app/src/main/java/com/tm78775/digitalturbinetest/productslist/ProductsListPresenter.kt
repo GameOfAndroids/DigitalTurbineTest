@@ -34,7 +34,7 @@ class ProductsListPresenter(private val view: ProductsListContract.View): Produc
         view.showProgressBar(true)
         model!!.getProductsSimulated { it ->
             recyclerViewAdapter.appendToDataSource(it)
-            recyclerViewAdapter.notifyDataSetChanged()
+            view.notifyAndPerformEnterAnimation()
             view.showProgressBar(false)
         }
     }
