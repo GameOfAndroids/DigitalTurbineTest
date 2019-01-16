@@ -24,15 +24,14 @@ class MainActivityViewModel: ViewModel() {
     private val fetchJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + fetchJob)
     private val serverAPIModel = ServerAPIModel()
-    private val products = ArrayList<Product>()
 
     // endregion
 
     // region API
 
-    fun fetchProductsList(callback: (List<Product>?, Exception?) -> Unit) {
+    fun fetchProductsList(page: Int, callback: (List<Product>?, Exception?) -> Unit) {
         uiScope.launch {
-            serverAPIModel.fetchProductsList(callback)
+            serverAPIModel.fetchProductsList(page, callback)
         }
     }
 

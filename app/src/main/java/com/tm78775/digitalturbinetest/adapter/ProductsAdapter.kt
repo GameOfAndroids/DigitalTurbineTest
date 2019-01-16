@@ -27,4 +27,9 @@ class ProductsAdapter(private val callback: (Product) -> Unit): BaseAdapter<Prod
         callback.invoke(product)
     }
 
+    override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
+        super.onViewRecycled(holder)
+        (holder as? ProductListItemViewHolder)?.thumbImageView?.setImageBitmap(null)
+    }
+
 }

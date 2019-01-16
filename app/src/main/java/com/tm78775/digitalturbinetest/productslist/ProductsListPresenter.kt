@@ -8,6 +8,7 @@ class ProductsListPresenter(private val view: ProductsListContract.View): Produc
 
     var model: MainActivityViewModel? = null
     lateinit var recyclerViewAdapter: ProductsAdapter
+    var pageToFetch = 0
 
     override fun onAttach(model: MainActivityViewModel) {
         this.model = model
@@ -29,19 +30,24 @@ class ProductsListPresenter(private val view: ProductsListContract.View): Produc
         // load more items.
     }
 
-    override fun displayProductsList() {
+    override fun fetchPageOfProducts() {
         model ?: throw IllegalStateException("The model must be instantiated for the ProductsListPresenter to function properly.")
         view.showProgressBar(true)
-        model!!.fetchProductsList { products, exception ->
+        model!!.fetchProductsList(pageToFetch) { products, exception ->
             if(exception != null) {
                 view.showFetchError()
                 return@fetchProductsList
             }
 
+            pageToFetch++
             recyclerViewAdapter.appendToDataSource(products ?: listOf())
             view.notifyDataSetChanged()
             view.showProgressBar(false)
         }
+    }
+
+    override fun resetPageToFetch() {
+        pageToFetch = 0
     }
 
 }

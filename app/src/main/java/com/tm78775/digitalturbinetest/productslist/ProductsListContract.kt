@@ -24,7 +24,8 @@ interface ProductsListContract {
         fun onDetach()
         fun getAdapter(): ProductsAdapter
         fun onBottomReached()
-        fun displayProductsList()
+        fun fetchPageOfProducts()
+        fun resetPageToFetch()
     }
 
 }

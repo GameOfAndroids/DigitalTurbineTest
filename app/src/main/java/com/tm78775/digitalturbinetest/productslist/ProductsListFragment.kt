@@ -62,7 +62,12 @@ class ProductsListFragment : Fragment(), ProductsListContract.View {
 
     override fun onStart() {
         super.onStart()
-        presenter.displayProductsList()
+        presenter.fetchPageOfProducts()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.resetPageToFetch()
     }
 
     // endregion
@@ -109,11 +114,9 @@ class ProductsListFragment : Fragment(), ProductsListContract.View {
 
     override fun onProductClicked(product: Product) {
         getUiHandler().post {
-            // val fragment = ProductDetailFragment.newInstance(product)
-//            val args = Bundle()
-//            args.putSerializable(ProductDetailFragment.PRODUCT_ARG, product)
-//            val action =
-//            findNavController(this).navigate(R.id.productDetailFragment, args)
+            val args = Bundle()
+            args.putSerializable(ProductDetailFragment.PRODUCT_ARG, product)
+            findNavController(this).navigate(R.id.productDetailFragment, args)
         }
     }
 

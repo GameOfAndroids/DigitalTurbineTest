@@ -14,13 +14,12 @@ import retrofit2.Retrofit
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 import java.lang.Exception
 
-class ServerAPIModel/*: Callback<ResponseBody>*/ {
-    // TODO: TUTORIAL: https://futurestud.io/tutorials/retrofit-how-to-integrate-xml-converter
+class ServerAPIModel {
+
     // region Variables
 
     private val tag = "ServerAPIModel"
     private val baseUrl = "http://ads.appia.com/"
-
     private val retrofit = Retrofit.Builder()
         .baseUrl(baseUrl)
         .addConverterFactory(SimpleXmlConverterFactory.create())
@@ -39,11 +38,11 @@ class ServerAPIModel/*: Callback<ResponseBody>*/ {
      * will be passed to the callback flagging an exception occurred event.
      * @param callback Callback accepting a nullable list parameter and a nullable exception parameter.
      */
-    suspend fun fetchProductsList(callback: (List<Product>?, Exception?) -> Unit) {
+    suspend fun fetchProductsList(page: Int, callback: (List<Product>?, Exception?) -> Unit) {
         GlobalScope.launch(Dispatchers.IO) {
             try {
                 val response: Response<ProductList> = serverAPI.getProductsList("johnson").execute()
-                val products = response.body()?.products
+                val products: List<Product>? = response.body()?.products
                 callback(products, null)
             } catch (ex: Exception) {
                 Log.e(tag, "An error occurred making GET request: ${ex.localizedMessage}")
@@ -51,18 +50,6 @@ class ServerAPIModel/*: Callback<ResponseBody>*/ {
             }
         }
     }
-
-    // endregion
-
-    // region Callback Implementation Methods
-
-//    override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-//    }
-//
-//    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-//    }
 
     // endregion
 
