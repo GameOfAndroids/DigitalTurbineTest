@@ -19,7 +19,7 @@ class ProductListItemViewHolder(view: View): RecyclerView.ViewHolder(view) {
     }
 
     fun bind(product: Product) {
-        nameTextView.text = product.name
+        nameTextView.text = product.productName
         ratingTextView.text = product.rating
     }
 

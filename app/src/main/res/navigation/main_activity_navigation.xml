@@ -5,7 +5,7 @@
             app:startDestination="@id/productsListFragment">
 
     <fragment android:id="@+id/productsListFragment"
-              android:name="com.tm78775.digitalturbinetest.productslist.ProductsListFragment"
+              android:name="com.tm78775.digitalturbinetest.adslist.ProductsListFragment"
               android:label="fragment_products_list" tools:layout="@layout/fragment_products_list">
         <action android:id="@+id/action_productsListFragment_to_productDetailFragment"
                 app:destination="@id/productDetailFragment"/>

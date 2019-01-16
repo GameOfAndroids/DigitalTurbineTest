@@ -1,4 +1,4 @@
-package com.tm78775.digitalturbinetest.productslist
+package com.tm78775.digitalturbinetest.adslist
 
 import com.tm78775.digitalturbinetest.adapter.ProductsAdapter
 import com.tm78775.digitalturbinetest.main.MainViewModel

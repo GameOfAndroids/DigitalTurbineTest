@@ -1,8 +1,5 @@
-package com.tm78775.digitalturbinetest.productslist
+package com.tm78775.digitalturbinetest.adslist
 
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
 import com.tm78775.digitalturbinetest.adapter.ProductsAdapter
 import com.tm78775.digitalturbinetest.main.MainViewModel
 import java.lang.IllegalStateException
