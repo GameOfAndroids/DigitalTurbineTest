@@ -1,15 +1,15 @@
-package com.tm78775.digitalturbinetest.adslist
+package com.tm78775.digitalturbinetest.productslist
 
 import com.tm78775.digitalturbinetest.adapter.ProductsAdapter
-import com.tm78775.digitalturbinetest.main.MainViewModel
+import com.tm78775.digitalturbinetest.viewmodel.MainActivityViewModel
 import java.lang.IllegalStateException
 
 class ProductsListPresenter(private val view: ProductsListContract.View): ProductsListContract.Presenter {
 
-    var model: MainViewModel? = null
+    var model: MainActivityViewModel? = null
     lateinit var recyclerViewAdapter: ProductsAdapter
 
-    override fun onAttach(model: MainViewModel) {
+    override fun onAttach(model: MainActivityViewModel) {
         this.model = model
     }
 
@@ -18,7 +18,10 @@ class ProductsListPresenter(private val view: ProductsListContract.View): Produc
     }
 
     override fun getAdapter(): ProductsAdapter {
-        recyclerViewAdapter = ProductsAdapter()
+        recyclerViewAdapter = ProductsAdapter() { product ->
+            view.onProductClicked(product)
+        }
+
         return recyclerViewAdapter
     }
 
@@ -29,14 +32,16 @@ class ProductsListPresenter(private val view: ProductsListContract.View): Produc
     override fun displayProductsList() {
         model ?: throw IllegalStateException("The model must be instantiated for the ProductsListPresenter to function properly.")
         view.showProgressBar(true)
-        model!!.getProducts { it ->
-            val s = ""
+        model!!.fetchProductsList { products, exception ->
+            if(exception != null) {
+                view.showFetchError()
+                return@fetchProductsList
+            }
+
+            recyclerViewAdapter.appendToDataSource(products ?: listOf())
+            view.notifyDataSetChanged()
+            view.showProgressBar(false)
         }
-//        model!!.getProductsSimulated { it ->
-//            recyclerViewAdapter.appendToDataSource(it)
-//            view.notifyAndPerformEnterAnimation()
-//            view.showProgressBar(false)
-//        }
     }
 
 }

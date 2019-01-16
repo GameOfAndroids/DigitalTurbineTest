@@ -9,20 +9,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.tm78775.digitalturbinetest.R
 import com.tm78775.digitalturbinetest.viewinterface.ProgressBarInterface
+import com.tm78775.digitalturbinetest.viewmodel.MainActivityViewModel
 
-class MainActivity : AppCompatActivity(), MainViewModel.ViewModelActivity, ProgressBarInterface {
+class MainActivity : AppCompatActivity(), MainActivityViewModel.MainViewModelActivity, ProgressBarInterface {
 
     // region Variables
 
-    private lateinit var model: MainViewModel
+    private lateinit var model: MainActivityViewModel
     private lateinit var progressBar: ProgressBar
-    private val progressBarAnimDuration: Long = 200
+    private val progressBarAnimDuration: Long = 400
 
     // endregion
 
     // region Interface Methods
 
-    override fun getViewModel(): MainViewModel {
+    override fun getViewModel(): MainActivityViewModel {
         return model
     }
 
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity(), MainViewModel.ViewModelActivity, Progr
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        model = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        model = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
         progressBar = findViewById(R.id.progressBar)
     }
 
