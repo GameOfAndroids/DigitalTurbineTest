@@ -32,7 +32,7 @@ class ProductListItemViewHolder(view: View, private val listener: OnClickedItemI
         Picasso.get().load(product.productThumbnail).into(thumbImageView)
         Picasso.get().load(product.averageRatingImageURL).into(ratingImageView, object : Callback {
             override fun onSuccess() {
-                val s = ""
+
             }
 
             override fun onError(e: Exception?) {
