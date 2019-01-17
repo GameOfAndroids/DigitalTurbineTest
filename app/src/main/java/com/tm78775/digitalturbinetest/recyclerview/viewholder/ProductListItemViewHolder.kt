@@ -1,6 +1,5 @@
-package com.tm78775.digitalturbinetest.viewholder
+package com.tm78775.digitalturbinetest.recyclerview.viewholder
 
-import android.graphics.Bitmap
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -9,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.tm78775.digitalturbinetest.R
-import com.tm78775.digitalturbinetest.adapter.OnClickedItemIndexListener
+import com.tm78775.digitalturbinetest.recyclerview.adapter.OnClickedItemIndexListener
 import com.tm78775.digitalturbinetest.datamodel.Product
 import kotlinx.android.synthetic.main.item_product.view.*
 import java.lang.Exception
@@ -18,7 +17,7 @@ class ProductListItemViewHolder(view: View, private val listener: OnClickedItemI
 
     val thumbImageView: ImageView = view.thumbImageView
     val nameTextView: TextView = view.nameTextView
-    val ratingImageView: ImageView = view.findViewById(R.id.ratingStarsImageView)
+    val ratingImageView: ImageView = view.ratingStarsImageView
 
     init {
         view.findViewById<CardView>(R.id.productItemCardView).preventCornerOverlap = false
@@ -40,5 +39,4 @@ class ProductListItemViewHolder(view: View, private val listener: OnClickedItemI
             }
         })
     }
-
 }

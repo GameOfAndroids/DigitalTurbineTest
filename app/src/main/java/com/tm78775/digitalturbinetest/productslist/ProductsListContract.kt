@@ -1,6 +1,6 @@
 package com.tm78775.digitalturbinetest.productslist
 
-import com.tm78775.digitalturbinetest.adapter.ProductsAdapter
+import com.tm78775.digitalturbinetest.recyclerview.adapter.ProductsAdapter
 import com.tm78775.digitalturbinetest.datamodel.Product
 import com.tm78775.digitalturbinetest.viewmodel.MainActivityViewModel
 

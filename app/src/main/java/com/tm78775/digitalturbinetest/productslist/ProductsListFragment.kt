@@ -15,7 +15,7 @@ import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 
 import com.tm78775.digitalturbinetest.R
-import com.tm78775.digitalturbinetest.adapter.ProductsAdapter
+import com.tm78775.digitalturbinetest.recyclerview.adapter.ProductsAdapter
 import com.tm78775.digitalturbinetest.datamodel.Product
 import com.tm78775.digitalturbinetest.productdetail.ProductDetailFragment
 import com.tm78775.digitalturbinetest.viewmodel.MainActivityViewModel
@@ -64,6 +64,7 @@ class ProductsListFragment : Fragment(), ProductsListContract.View {
     override fun onStart() {
         super.onStart()
         (rv.adapter as? ProductsAdapter)?.dataSource?.setDataSource(listOf())
+        rv.adapter?.notifyDataSetChanged()
         presenter.fetchPageOfProducts()
     }
 

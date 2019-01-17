@@ -41,7 +41,7 @@ class ServerAPIModel {
     suspend fun fetchProductsList(page: Int, callback: (List<Product>?, Exception?) -> Unit) {
         GlobalScope.launch(Dispatchers.IO) {
             try {
-                val response: Response<ProductList> = serverAPI.getProductsList("johnson").execute()
+                val response: Response<ProductList> = serverAPI.getProductsList("miller").execute()
                 val products: List<Product>? = response.body()?.products
                 callback(products, null)
             } catch (ex: Exception) {

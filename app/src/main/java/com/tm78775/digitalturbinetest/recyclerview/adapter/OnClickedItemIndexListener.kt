@@ -1,4 +1,4 @@
-package com.tm78775.digitalturbinetest.adapter
+package com.tm78775.digitalturbinetest.recyclerview.adapter
 
 interface OnClickedItemIndexListener {
     fun onItemClicked(index: Int)

@@ -1,8 +1,7 @@
-package com.tm78775.digitalturbinetest.adapter
+package com.tm78775.digitalturbinetest.recyclerview.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.tm78775.digitalturbinetest.datasource.DataSource
-import java.lang.IllegalStateException
 
 abstract class BaseAdapter<T>: RecyclerView.Adapter<RecyclerView.ViewHolder>(), OnClickedItemIndexListener {
 
@@ -22,7 +21,7 @@ abstract class BaseAdapter<T>: RecyclerView.Adapter<RecyclerView.ViewHolder>(), 
      * that an item was clicked.
      */
     override fun onItemClicked(index: Int) {
-        // this can be overridden if needed or left empty if not needed.
+        // this can be overridden if needed or not implemented if not needed.
     }
 
 }
