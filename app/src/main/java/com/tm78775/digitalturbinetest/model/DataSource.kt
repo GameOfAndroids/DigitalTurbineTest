@@ -1,4 +1,4 @@
-package com.tm78775.digitalturbinetest.datasource
+package com.tm78775.digitalturbinetest.model
 
 class DataSource<T> {
 

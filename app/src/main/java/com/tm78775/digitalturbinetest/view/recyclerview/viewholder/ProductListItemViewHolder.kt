@@ -1,4 +1,4 @@
-package com.tm78775.digitalturbinetest.recyclerview.viewholder
+package com.tm78775.digitalturbinetest.view.recyclerview.viewholder
 
 import android.view.View
 import android.widget.ImageView
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.tm78775.digitalturbinetest.R
-import com.tm78775.digitalturbinetest.recyclerview.adapter.OnClickedItemIndexListener
+import com.tm78775.digitalturbinetest.view.recyclerview.adapter.OnClickedItemIndexListener
 import com.tm78775.digitalturbinetest.datamodel.Product
 import kotlinx.android.synthetic.main.item_product.view.*
 import java.lang.Exception

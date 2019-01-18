@@ -1,14 +1,13 @@
-package com.tm78775.digitalturbinetest.retrofit
+package com.tm78775.digitalturbinetest.model
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.tm78775.digitalturbinetest.datamodel.Product
 import com.tm78775.digitalturbinetest.datamodel.ProductList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import okhttp3.ResponseBody
-import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
@@ -27,6 +26,10 @@ class ServerAPIModel {
 
     private val serverAPI = retrofit.create(ServerAPI::class.java)
 
+    // Live Data object - this will allow a subscriber to listen for changes to this data set.
+    val fetchedProducts = MutableLiveData<ArrayList<Product>>()
+    val exceptionLiveData = MutableLiveData<Exception>()
+
     // endregion
 
     // region API
@@ -38,15 +41,21 @@ class ServerAPIModel {
      * will be passed to the callback flagging an exception occurred event.
      * @param callback Callback accepting a nullable list parameter and a nullable exception parameter.
      */
-    suspend fun fetchProductsList(page: Int, callback: (List<Product>?, Exception?) -> Unit) {
+    suspend fun fetchProductsList() {
         GlobalScope.launch(Dispatchers.IO) {
             try {
-                val response: Response<ProductList> = serverAPI.getProductsList("miller").execute()
-                val products: List<Product>? = response.body()?.products
-                callback(products, null)
+                val response = serverAPI.getProductsList("miller").execute()
+                val products = response.body()?.products
+                fetchedProducts.value?.addAll(products ?: arrayListOf())
+                fetchedProducts.postValue(fetchedProducts.value)
             } catch (ex: Exception) {
                 Log.e(tag, "An error occurred making GET request: ${ex.localizedMessage}")
-                callback(null, ex)
+                if(exceptionLiveData.hasActiveObservers())
+                    exceptionLiveData.postValue(ex)
+                else {
+                    Log.e(tag, "There was no registered observer for the exception. Since exception was not caught, throwing exception...")
+                    throw ex
+                }
             }
         }
     }

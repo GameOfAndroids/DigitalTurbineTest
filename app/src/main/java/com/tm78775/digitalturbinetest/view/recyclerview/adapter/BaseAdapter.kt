@@ -1,11 +1,12 @@
-package com.tm78775.digitalturbinetest.recyclerview.adapter
+package com.tm78775.digitalturbinetest.view.recyclerview.adapter
 
 import androidx.recyclerview.widget.RecyclerView
-import com.tm78775.digitalturbinetest.datasource.DataSource
+import com.tm78775.digitalturbinetest.model.DataSource
 
 abstract class BaseAdapter<T>: RecyclerView.Adapter<RecyclerView.ViewHolder>(), OnClickedItemIndexListener {
 
-    var dataSource: DataSource<T> = DataSource()
+    var dataSource: DataSource<T> =
+        DataSource()
 
     override fun getItemCount(): Int {
         return dataSource.getItemCount()

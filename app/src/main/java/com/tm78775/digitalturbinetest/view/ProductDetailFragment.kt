@@ -1,4 +1,4 @@
-package com.tm78775.digitalturbinetest.productdetail
+package com.tm78775.digitalturbinetest.view
 
 
 import android.os.Bundle

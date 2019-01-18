@@ -1,4 +1,4 @@
-package com.tm78775.digitalturbinetest.recyclerview
+package com.tm78775.digitalturbinetest.view.recyclerview
 
 import android.content.Context
 import android.util.AttributeSet

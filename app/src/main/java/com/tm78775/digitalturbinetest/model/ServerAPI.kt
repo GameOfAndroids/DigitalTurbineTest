@@ -1,4 +1,4 @@
-package com.tm78775.digitalturbinetest.retrofit
+package com.tm78775.digitalturbinetest.model
 
 import com.tm78775.digitalturbinetest.datamodel.Product
 import com.tm78775.digitalturbinetest.datamodel.ProductList

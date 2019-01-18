@@ -1,11 +1,11 @@
-package com.tm78775.digitalturbinetest.recyclerview.adapter
+package com.tm78775.digitalturbinetest.view.recyclerview.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tm78775.digitalturbinetest.R
 import com.tm78775.digitalturbinetest.datamodel.Product
-import com.tm78775.digitalturbinetest.recyclerview.viewholder.ProductListItemViewHolder
+import com.tm78775.digitalturbinetest.view.recyclerview.viewholder.ProductListItemViewHolder
 
 class ProductsAdapter(private val callback: (Product) -> Unit): BaseAdapter<Product>() {
 
