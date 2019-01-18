@@ -31,19 +31,19 @@ class ProductsListPresenter(): ProductsListContract.Presenter {
     }
 
     override fun fetchPageOfProducts() {
-        model ?: throw IllegalStateException("The model must be instantiated for the ProductsListPresenter to function properly.")
-        //view.showProgressBar(true)
-        model!!.fetchProductsList(pageToFetch) { products, exception ->
-            if(exception != null) {
-                //view.showFetchError()
-                return@fetchProductsList
-            }
-
-            pageToFetch++
-            recyclerViewAdapter.appendToDataSource(products ?: listOf())
-//            view.notifyDataSetChanged()
-//            view.showProgressBar(false)
-        }
+//        model ?: throw IllegalStateException("The model must be instantiated for the ProductsListPresenter to function properly.")
+//        //view.showProgressBar(true)
+//        model!!.fetchProductsList(pageToFetch) { products, exception ->
+//            if(exception != null) {
+//                //view.showFetchError()
+//                return@fetchProductsList
+//            }
+//
+//            pageToFetch++
+//            recyclerViewAdapter.appendToDataSource(products ?: listOf())
+////            view.notifyDataSetChanged()
+////            view.showProgressBar(false)
+//        }
     }
 
     override fun resetPageToFetch() {

@@ -14,4 +14,5 @@
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp" android:id="@+id/productsRecyclerView"
             android:foregroundGravity="center_horizontal"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,4 +8,5 @@
     <dimen name="imageview_thumb_square">60dp</dimen>
     <dimen name="progressbar_elevation">4dp</dimen>
     <integer name="progressbar_showhide_dur">200</integer>
+    <string name="product_arg">ProductArgument</string>
 </resources>
