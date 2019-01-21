@@ -4,4 +4,7 @@
     <string name="rating_label">Rating:</string>
     <string name="fetch_error">An error occurred when communicating with the server. Please try again later.</string>
     <string name="hello_blank_fragment">Blank ass fragment</string>
+    <string name="ratings">Ratings</string>
+    <string name="category">Category</string>
+    <string name="outOfFive"> / 5.0</string>
 </resources>

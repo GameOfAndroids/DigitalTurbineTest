@@ -1,6 +1,8 @@
-package com.tm78775.digitalturbinetest.view
+package com.tm78775.digitalturbinetest.productslist
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,37 +13,30 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 
 import com.tm78775.digitalturbinetest.R
 import com.tm78775.digitalturbinetest.view.recyclerview.adapter.ProductsAdapter
 import com.tm78775.digitalturbinetest.datamodel.Product
-import com.tm78775.digitalturbinetest.productslist.ProductsListContract
-import com.tm78775.digitalturbinetest.productslist.ProductsListPresenter
-import com.tm78775.digitalturbinetest.viewmodel.ProductsViewModel
+import com.tm78775.digitalturbinetest.view.ProgressBarInterface
 import com.tm78775.digitalturbinetest.view.recyclerview.SuperRecyclerView
 import kotlinx.android.synthetic.main.fragment_products_list.view.*
 
 /**
  * This fragment will be responsible for displaying all products from which we can select.
  */
-class ProductsListFragment : Fragment() {
+class ProductsListFragment : Fragment(), ProductsListContract.View {
 
     // region Variables
 
+    private val presenter: ProductsListContract.Presenter = ProductsListPresenter(this)
     private lateinit var rv: SuperRecyclerView
-    private lateinit var viewModel: ProductsViewModel
     private lateinit var adapter: ProductsAdapter
     private var progressBarInterface: ProgressBarInterface? = null
 
     // endregion
 
     // region Lifecycle
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(ProductsViewModel::class.java)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_products_list, container, false)
@@ -51,58 +46,65 @@ class ProductsListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         rv = view.productsRecyclerView
         rv.layoutManager = GridLayoutManager(view.context, 2)
+        rv.layoutAnimation = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_from_bottom)
         adapter = ProductsAdapter { clickedProduct ->
             onProductClicked(clickedProduct)
         }
         rv.adapter = adapter
+        progressBarInterface = activity as? ProgressBarInterface
+        activity?.actionBar?.setDisplayHomeAsUpEnabled(false)
     }
 
     override fun onStart() {
         super.onStart()
         adapter.dataSource.setDataSource(listOf())
         adapter.notifyDataSetChanged()
-        progressBarInterface = activity as? ProgressBarInterface
-        progressBarInterface?.showProgressBar(true)
-        viewModel.observableProductsList.observe(this, object : Observer<ArrayList<Product>> {
-            override fun onChanged(products: ArrayList<Product>) { onDataFetchSuccess(products) }
-        })
-        viewModel.observableError.observe(this, object : Observer<Throwable> {
-            override fun onChanged(t: Throwable?) { onDataFetchException(t!!) }
-        })
-        viewModel.getListOfProducts()
+        presenter.fetchPageOfProducts()
     }
 
     // endregion
 
     // region Helper Methods
 
-    /**
-     * Helper method to simplify calling and showing a simple toast message.
-     */
-    private fun showToastMessage(msg: String) {
-        Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
+    private fun getUIHandler(): Handler {
+        return Handler(if(Looper.myLooper() == Looper.getMainLooper()) Looper.myLooper() else Looper.getMainLooper())
     }
 
-    private fun onDataFetchSuccess(products: ArrayList<Product>) {
-        progressBarInterface?.showProgressBar(false)
-        adapter.appendToDataSource(products)
-        rv.adapter?.notifyDataSetChanged()
-        rv.scheduleLayoutAnimation()
+    override fun onDataFetchedSuccessfully(products: ArrayList<Product>) {
+        getUIHandler().post {
+            adapter.appendToDataSource(products)
+            adapter.notifyDataSetChanged()
+            rv.scheduleLayoutAnimation()
+        }
     }
 
-    private fun onDataFetchException(t: Throwable) {
-//        handle thrown exception.
-//        when(t) {
-//
+    override fun onDataFetchException(ex: Exception) {
+//        when(ex) {
+//            // choose what to do based on the exception.
 //        }
-        progressBarInterface?.showProgressBar(false)
-        showToastMessage(getString(R.string.fetch_error))
+        getUIHandler().post {
+            showSnackMessage(getString(R.string.fetch_error))
+        }
+    }
+
+    override fun showProgressBar(show: Boolean) {
+        getUIHandler().post {
+            progressBarInterface?.showProgressBar(show)
+        }
+    }
+
+    /**
+     * Helper method to simplify showing a simple toast message.
+     */
+    private fun showSnackMessage(msg: String) {
+        view ?: return
+        Snackbar.make(view!!, msg, Snackbar.LENGTH_LONG).show()
     }
 
     private fun onProductClicked(product: Product) {
         val args = Bundle()
         args.putSerializable(getString(R.string.product_arg), product)
-        findNavController(this).navigate(R.id.productDetailFragment, args)
+        findNavController(this).navigate(R.id.action_productsListFragment_to_productDetailFragment, args)
     }
 
     // endregion

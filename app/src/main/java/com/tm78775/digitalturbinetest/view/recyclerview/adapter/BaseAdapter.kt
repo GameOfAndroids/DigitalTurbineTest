@@ -5,11 +5,16 @@ import com.tm78775.digitalturbinetest.model.DataSource
 
 abstract class BaseAdapter<T>: RecyclerView.Adapter<RecyclerView.ViewHolder>(), OnClickedItemIndexListener {
 
-    var dataSource: DataSource<T> =
-        DataSource()
+    lateinit var dataSource: DataSource<T>
+
+    abstract fun initDataSource()
+
+    init {
+        this.initDataSource()
+    }
 
     override fun getItemCount(): Int {
-        return dataSource.getItemCount()
+        return dataSource.count
     }
 
     fun appendToDataSource(items: List<T>) {

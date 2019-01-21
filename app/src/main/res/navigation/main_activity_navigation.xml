@@ -5,13 +5,14 @@
             app:startDestination="@id/productsListFragment">
 
     <fragment android:id="@+id/productsListFragment"
-              android:name="com.tm78775.digitalturbinetest.view.ProductsListFragment"
+              android:name="com.tm78775.digitalturbinetest.productslist.ProductsListFragment"
               android:label="fragment_products_list" tools:layout="@layout/fragment_products_list">
         <action android:id="@+id/action_productsListFragment_to_productDetailFragment"
-                app:destination="@id/productDetailFragment"/>
+                app:destination="@id/productDetailFragment" app:enterAnim="@anim/right_in"
+                app:exitAnim="@anim/left_out" app:popExitAnim="@anim/right_out" app:popEnterAnim="@anim/left_in"/>
     </fragment>
     <fragment android:id="@+id/productDetailFragment"
-              android:name="com.tm78775.digitalturbinetest.view.ProductDetailFragment"
+              android:name="com.tm78775.digitalturbinetest.productdetail.ProductDetailFragment"
               android:label="fragment_product_detail" tools:layout="@layout/fragment_product_detail">
         <argument android:name="productArg"/>
     </fragment>

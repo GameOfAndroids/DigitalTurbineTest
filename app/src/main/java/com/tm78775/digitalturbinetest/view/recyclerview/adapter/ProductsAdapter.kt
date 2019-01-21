@@ -5,9 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tm78775.digitalturbinetest.R
 import com.tm78775.digitalturbinetest.datamodel.Product
+import com.tm78775.digitalturbinetest.model.ProductsDataSource
 import com.tm78775.digitalturbinetest.view.recyclerview.viewholder.ProductListItemViewHolder
 
 class ProductsAdapter(private val callback: (Product) -> Unit): BaseAdapter<Product>() {
+
+    override fun initDataSource() {
+        dataSource = ProductsDataSource()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_product, parent, false)

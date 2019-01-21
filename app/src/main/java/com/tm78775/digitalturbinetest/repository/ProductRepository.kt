@@ -13,10 +13,15 @@ class ProductRepository {
     private val fetchJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + fetchJob)
     private val serverAPI = ServerProductAPIModel()
+    private val productsStoredLocally = false
 
-    fun getListOfProducts(callback: (ArrayList<Product>, Throwable?) -> Unit) {
-        uiScope.launch {
-            serverAPI.fetchProductsList(callback)
+    fun getListOfProducts(callback: (ArrayList<Product>?, Exception?) -> Unit) {
+        if(productsStoredLocally) {
+            // retrieve from local db
+        } else {
+            uiScope.launch {
+                serverAPI.fetchProductsList(callback)
+            }
         }
     }
 

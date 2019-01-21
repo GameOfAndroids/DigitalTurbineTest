@@ -8,14 +8,11 @@ import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.tm78775.digitalturbinetest.R
-import com.tm78775.digitalturbinetest.viewmodel.ProductsViewModel
 
-class MainActivity : AppCompatActivity(),
-    ProgressBarInterface {
+class MainActivity : AppCompatActivity(), ProgressBarInterface {
 
     // region Variables
 
-    private lateinit var viewModel: ProductsViewModel
     private lateinit var progressBar: ProgressBar
     private val progressBarAnimDuration: Long = 400
 
@@ -26,8 +23,8 @@ class MainActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        viewModel = ViewModelProviders.of(this).get(ProductsViewModel::class.java)
         progressBar = findViewById(R.id.progressBar)
+        actionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     // endregion

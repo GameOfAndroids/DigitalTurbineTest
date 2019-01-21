@@ -1,10 +1,19 @@
 package com.tm78775.digitalturbinetest.model
 
-class DataSource<T> {
+abstract class DataSource<T> {
 
     // region Variables
 
-    private val dataSource: MutableList<T> = mutableListOf()
+    protected val dataSource: MutableList<T> = mutableListOf()
+    var count: Int = dataSource.count()
+        get() { return dataSource.count() }
+        private set
+
+    // endregion
+
+    // region Abstract Methods
+
+    abstract fun contains(item: T): Boolean
 
     // endregion
 
@@ -18,13 +27,6 @@ class DataSource<T> {
     fun setDataSource(items: List<T>) {
         dataSource.clear()
         dataSource.addAll(items)
-    }
-
-    /**
-     * This method will return the number of items in the data source.
-     */
-    fun getItemCount(): Int {
-        return dataSource.count()
     }
 
     /**
@@ -52,9 +54,19 @@ class DataSource<T> {
     /**
      * This method will append items to the end of the data source.
      * @param items list of items to be appended to the end of the list.
+     * @param acceptDuplicates optional parameter. set to true if adding
+     * duplicates is the preferred methodology.
      */
-    fun addPageOfItems(items: List<T>) {
-        dataSource.addAll(items)
+    fun addPageOfItems(items: List<T>, acceptDuplicates: Boolean = false) {
+        if(acceptDuplicates)
+            dataSource.addAll(items)
+        else {
+            items.forEach { it ->
+                if(!contains(it)) {
+                    dataSource.add(it)
+                }
+            }
+        }
     }
 
     /**
