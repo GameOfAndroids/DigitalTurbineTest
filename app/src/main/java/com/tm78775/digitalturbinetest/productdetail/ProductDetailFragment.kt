@@ -18,9 +18,8 @@ import java.lang.IllegalStateException
  * A simple [Fragment] subclass.
  *
  */
-class ProductDetailFragment : Fragment(), ProductDetailContract.View {
+class ProductDetailFragment : Fragment() {
 
-    private val presenter: ProductDetailContract.Presenter = ProductDetailPresenter(this)
     private var product: Product? = null
         set(value) {
             field = value

@@ -2,12 +2,21 @@ package com.tm78775.digitalturbinetest.model
 
 import android.util.Log
 import com.tm78775.digitalturbinetest.datamodel.Product
+import com.tm78775.digitalturbinetest.datamodel.ProductList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
+import retrofit2.http.GET
+import retrofit2.http.Query
 import java.lang.Exception
+
+interface ServerProductAPI {
+    @GET("getAds?id=236&password=OVUJ1DJN&siteId=10777&deviceId=4230&sessionId=techtestsession&totalCampaignsRequested=10")
+    fun getProductsList(@Query("lname") lname: String): Call<ProductList>
+}
 
 class ServerProductAPIModel {
 

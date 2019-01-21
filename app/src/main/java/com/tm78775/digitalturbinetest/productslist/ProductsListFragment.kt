@@ -52,7 +52,6 @@ class ProductsListFragment : Fragment(), ProductsListContract.View {
         }
         rv.adapter = adapter
         progressBarInterface = activity as? ProgressBarInterface
-        activity?.actionBar?.setDisplayHomeAsUpEnabled(false)
     }
 
     override fun onStart() {

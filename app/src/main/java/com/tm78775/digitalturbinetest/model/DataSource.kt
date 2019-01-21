@@ -5,6 +5,7 @@ abstract class DataSource<T> {
     // region Variables
 
     protected val dataSource: MutableList<T> = mutableListOf()
+
     var count: Int = dataSource.count()
         get() { return dataSource.count() }
         private set
@@ -13,6 +14,10 @@ abstract class DataSource<T> {
 
     // region Abstract Methods
 
+    /**
+     * Method to be implemented by child class which will determine
+     * if the object is in the data source.
+     */
     abstract fun contains(item: T): Boolean
 
     // endregion
@@ -52,6 +57,14 @@ abstract class DataSource<T> {
     }
 
     /**
+     * This method will remove the item in the list by index.
+     * @param index index of the item which should be removed.
+     */
+    fun removeItem(index: Int) {
+        dataSource.removeAt(index)
+    }
+
+    /**
      * This method will append items to the end of the data source.
      * @param items list of items to be appended to the end of the list.
      * @param acceptDuplicates optional parameter. set to true if adding
@@ -67,14 +80,6 @@ abstract class DataSource<T> {
                 }
             }
         }
-    }
-
-    /**
-     * This method will remove the item in the list by index.
-     * @param index index of the item which should be removed.
-     */
-    fun removeItem(index: Int) {
-        dataSource.removeAt(index)
     }
 
     // endregion

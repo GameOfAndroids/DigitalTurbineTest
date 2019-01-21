@@ -64,7 +64,6 @@ open class SuperRecyclerView: RecyclerView {
                         }
                     }
                 }
-
             }
         })
     }

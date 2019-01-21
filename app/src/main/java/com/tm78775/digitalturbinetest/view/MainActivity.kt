@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity(), ProgressBarInterface {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         progressBar = findViewById(R.id.progressBar)
-        actionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     // endregion
