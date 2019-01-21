@@ -17,6 +17,7 @@ class ProductListItemViewHolder(view: View, private val listener: OnClickedItemI
 
     val thumbImageView: ImageView = view.thumbImageView
     val nameTextView: TextView = view.nameTextView
+    val ratingTextView: TextView = view.avgRatingTextView
 
     init {
         view.findViewById<CardView>(R.id.productItemCardView).preventCornerOverlap = false
@@ -28,5 +29,6 @@ class ProductListItemViewHolder(view: View, private val listener: OnClickedItemI
     fun bind(product: Product) {
         nameTextView.text = product.productName
         Picasso.get().load(product.productThumbnail).into(thumbImageView)
+        ratingTextView.text = product.rating
     }
 }
